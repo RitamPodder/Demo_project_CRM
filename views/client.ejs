@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+              <title>Maze Soft Solution</title>
+              <link rel="icon" href="logo.png" type="image/gif" sizes="16x16">
+
+        <!-- Prevent the demo from appearing in search engines -->
+        <meta name="robots"
+              content="noindex">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CRoboto:400,500%7CExo+2:600&display=swap"
+              rel="stylesheet">
+
+        <!-- Preloader -->
+        <link type="text/css"
+              href="./public/vendor/spinkit.css"
+              rel="stylesheet">
+
+        <!-- Perfect Scrollbar -->
+        <link type="text/css"
+              href="./public/vendor/perfect-scrollbar.css"
+              rel="stylesheet">
+
+        <!-- Material Design Icons -->
+        <link type="text/css"
+              href="./public/css/material-icons.css"
+              rel="stylesheet">
+
+        <!-- Font Awesome Icons -->
+        <link type="text/css"
+              href="./public/css/fontawesome.css"
+              rel="stylesheet">
+
+        <!-- Preloader -->
+        <link type="text/css"
+              href="./public/css/preloader.css"
+              rel="stylesheet">
+
+        <!-- App CSS -->
+        <link type="text/css"
+              href="./public/css/app.css"
+              rel="stylesheet">
+
+         <!-- jQuery -->
+         <script src="./public/vendor/jquery.min.js"></script>
+
+         <!--Pagination-->
+         <link rel="Stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" text="text/css"/>
+
+         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+
+         <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>   
+    </head>
+
+    <body class="layout-sticky-subnav layout-default ">
+
+        <div class="preloader">
+            <!--<div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>-->
+
+            <div class="sk-bounce">
+    <div class="sk-bounce-dot"></div>
+    <div class="sk-bounce-dot"></div>
+  </div> 
+
+              <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
+
+
+        </div>
+
+        <!-- Header Layout -->
+        <div class="mdk-header-layout js-mdk-header-layout">
+
+            <!-- Header -->
+
+            <div id="header"
+            class="mdk-header js-mdk-header mb-0"
+            data-fixed
+            data-effects="">
+           <div class="mdk-header__content">
+
+               <!-- Navbar -->
+
+               <div class="navbar navbar-expand pr-0 bg-warning navbar-shadow"
+                    id="default-navbar"
+                    data-primary>
+
+                   <!-- Navbar Toggler -->
+
+                   <button class="navbar-toggler w-auto mr-16pt d-block rounded-0"
+                           type="button"
+                           data-toggle="sidebar">
+                       <span class="material-icons">short_text</span>
+                   </button>
+
+                   <!-- // END Navbar Toggler -->
+
+                   <!-- Navbar Brand -->
+
+                   <a href="/home"
+                   class="navbar-brand mr-16pt">
+
+                    <span class="avatar avatar-sm navbar-brand-icon mr-0 mr-lg-8pt">
+
+                        <span class="avatar-title rounded"><img src="logo.jpg"
+                            alt="logo"
+                            class="img-fluid" /></span>
+
+                    </span>
+
+                    <div id="username">
+
+                    </div>
+                </a>
+                <script>
+                    const url100 = "/username/getdata";
+
+                    fetch(url100)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            var username = data.username;
+                            console.log(username);
+                            $('#username').append('<span class="d-none d-lg-block">Welcome ' + username + '</span>');
+                            $('#side_panel').append('<span>Welcome ' + username + '</span>');
+                        })
+                        .catch(function (err) {
+                            console.log('error: ' + err);
+                        });
+                </script>
+
+                   <!-- // END Navbar Brand -->
+
+                   
+
+                   <!-- // END Navbar Search -->
+
+                   <div class="flex"></div>
+
+                   <!-- Navbar Menu -->
+
+                   <div class="nav navbar-nav flex-nowrap d-flex mr-16pt">
+
+                       <div class="nav-item dropdown">
+                           <a href="#"
+                              class="nav-link d-flex align-items-center dropdown-toggle"
+                              data-toggle="dropdown"
+                              data-caret="false">
+
+                               <span class="avatar avatar-sm mr-8pt2">
+
+                                   <span class="avatar-title rounded-circle bg-dark"><i class="material-icons">account_box</i></span>
+
+                               </span>
+
+                           </a>
+                           <div class="dropdown-menu dropdown-menu-right">
+                               <div class="dropdown-header"><strong>Account</strong></div>
+                               <a class="dropdown-item"
+                                  href="/edit-account">Edit Account</a>
+                               <a class="dropdown-item"
+                                  href="/logout">Logout</a>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- // END Navbar Menu -->
+
+               </div>
+
+               <!-- // END Navbar -->
+
+           </div>
+       </div>
+
+            <!-- // END Header -->
+
+            <!-- Header Layout Content -->
+            <div class="mdk-header-layout__content page-content ">
+
+                <div class="pt-32pt">
+                    <div class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+                        <div class="flex d-flex flex-column flex-sm-row align-items-center">
+                            
+                            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                                <h4 class="page-title">Client Details</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="javaScript:void();">Client Details</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="page-section container page__container">
+                    <div class="row">
+                    
+                        <div class="col-md-12 p-0">
+                            <!--<form id="client_search_form">
+                                <div class="form-group">
+                                    <label class="form-label">Client Name</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Client Name"
+                                           name="client_name"
+                                           />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Client Phone Number</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Client Phone Number"
+                                           name="client_phone_number"
+                                           />
+                                </div>
+                            </form>
+                            <button class="btn btn-primary" onclick="submit()"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>-->
+                            <!--<script>
+                                const url = "/studentClass/getdata";
+    
+                                fetch(url)
+                                    .then(function (response) {
+                                        return response.json();
+                                    })
+                                    .then(function (data) {
+                                    
+                                        appendData(data);
+                                    })
+                                    .catch(function (err) {
+                                        console.log('error: ' + err);
+                                    });
+                                
+                                    function appendData(data) {
+                                                //var mainContainer = document.getElementById("doctor_id");
+                                    
+                                                for (var i = 0; i < data.length; i++) {
+                                                
+                                                
+                                                
+                                                    var id = data[i].id;
+                                                
+                                                    var daySelect = document.getElementById("classes");
+                                                    var myOption = document.createElement("option");
+                                                    myOption.text = data[i].class_name;
+                                                    myOption.value = data[i].class_name;
+                                                    daySelect.add(myOption);
+                                                                        
+                                                }
+                                    }
+    
+                            </script>
+                            <script>
+                                function exportTableToExcel(tableID, filename = ''){
+                                    var downloadLink;
+                                    var dataType = 'application/vnd.ms-excel';
+                                    var tableSelect = document.getElementById(tableID);
+                                    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+                                    
+                                    // Specify file name
+                                    filename = filename?filename+'.xls':'excel_data.xls';
+                                    
+                                    // Create download link element
+                                    downloadLink = document.createElement("a");
+                                    
+                                    document.body.appendChild(downloadLink);
+                                    
+                                    if(navigator.msSaveOrOpenBlob){
+                                        var blob = new Blob(['\ufeff', tableHTML], {
+                                            type: dataType
+                                        });
+                                        navigator.msSaveOrOpenBlob( blob, filename);
+                                    }else{
+                                        // Create a link to the file
+                                        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+                                    
+                                        // Setting the file name
+                                        downloadLink.download = filename;
+                                        
+                                        //triggering the function
+                                        downloadLink.click();
+                                    }
+                                }
+                            </script>-->
+                        </div>
+                        </div>
+                    <br>
+                    <div class="card table-responsive">
+		                <div class="container">
+                            <div class="form-group" style="margin-top: 5px;"><!-- Show Numbers Of Rows -->
+                                <select class  ="form-control" name="state" id="maxRows">
+                                    <option value="5000">Show ALL Rows</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="70">70</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <style>
+                                .pagination{
+                                    padding: 20px;
+                                }
+
+                                .pagination li{
+                                    border: 1px solid rgb(0, 0, 0);
+                                    height: 20px;
+                                    width: 45px;
+                                    text-align: center;
+                                }
+
+                                .pagination li:hover{
+                                    cursor: pointer;
+                                    background-color: rgb(92, 90, 90);
+                                    color: white;
+                                }
+                            </style>
+                            <table class="table table-flush table-nowrap table-light table-striped shadow-light text-center" id="table-id">
+                                <thead>
+                                    <tr>
+                                        <!--<th scope="col">ID</th>-->
+                                        <th scope="col">Client ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">E-Mail</th>
+                                        <th scope="col">Note</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    
+                                </tbody>
+                            </table>
+                            
+                            <!-- Start Pagination -->
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class='pagination-container'>
+                                        <ul class="pagination">
+                                            <li data-page="prev" > <span> Prev <span class="sr-only">(current)</span></span></li>
+                                            <!-- Here the JS Function Will Add the Rows -->
+                                            <li data-page="next" id="prev"><span> Next <span class="sr-only">(current)</span></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End of Container -->
+    
+                    <script>
+                        getPagination('#table-id');
+                					//getPagination('.table-class');
+                					//getPagination('table');
+                    
+                		  /*					PAGINATION 
+                		  - on change max rows select options fade out all rows gt option value mx = 5
+                		  - append pagination list as per numbers of rows / max rows option (20row/5= 4pages )
+                		  - each pagination li on click -> fade out all tr gt max rows * li num and (5*pagenum 2 = 10 rows)
+                		  - fade out all tr lt max rows * li num - max rows ((5*pagenum 2 = 10) - 5)
+                		  - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
+                		  */
+                    
+                    
+                        function getPagination(table) {
+                          var lastPage = 1;
+                        
+                          $('#maxRows')
+                            .on('change', function(evt) {
+                              //$('.paginationprev').html('');						// reset pagination
+                            
+                             lastPage = 1;
+                              $('.pagination')
+                                .find('li')
+                                .slice(1, -1)
+                                .remove();
+                              var trnum = 0; // reset tr counter
+                              var maxRows = parseInt($(this).val()); // get Max Rows from select option
+                            
+                              if (maxRows == 5000) {
+                                $('.pagination').hide();
+                              } else {
+                                $('.pagination').show();
+                              }
+                          
+                              var totalRows = $(table + ' tbody tr').length; // numbers of rows
+                              $(table + ' tr:gt(0)').each(function() {
+                                // each TR in  table and not the header
+                                trnum++; // Start Counter
+                                if (trnum > maxRows) {
+                                  // if tr number gt maxRows
+                                
+                                  $(this).hide(); // fade it out
+                                }
+                                if (trnum <= maxRows) {
+                                  $(this).show();
+                                } // else fade in Important in case if it ..
+                              }); //  was fade out to fade it in
+                              if (totalRows > maxRows) {
+                                // if tr total rows gt max rows option
+                                var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..
+                                //	numbers of pages
+                                for (var i = 1; i <= pagenum; ) {
+                                  // for each page append pagination li
+                                  $('.pagination #prev')
+                                    .before(
+                                      '<li data-page="' +
+                                        i +
+                                        '">\
+                        								  <span>' +
+                                        i++ +
+                                        '<span class="sr-only">(current)</span></span>\
+                        								</li>'
+                                    )
+                                    .show();
+                                } // end for i
+                              } // end if row count > max rows
+                              $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li
+                              $('.pagination li').on('click', function(evt) {
+                                // on click each page
+                                evt.stopImmediatePropagation();
+                                evt.preventDefault();
+                                var pageNum = $(this).attr('data-page'); // get it's number
+                            
+                                var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+                            
+                                if (pageNum == 'prev') {
+                                  if (lastPage == 1) {
+                                    return;
+                                  }
+                                  pageNum = --lastPage;
+                                }
+                                if (pageNum == 'next') {
+                                  if (lastPage == $('.pagination li').length - 2) {
+                                    return;
+                                  }
+                                  pageNum = ++lastPage;
+                                }
+                            
+                                lastPage = pageNum;
+                                var trIndex = 0; // reset tr counter
+                                $('.pagination li').removeClass('active'); // remove active class from all li
+                                $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked
+                                // $(this).addClass('active');					// add active class to the clicked
+                        	  	limitPagging();
+                                $(table + ' tr:gt(0)').each(function() {
+                                  // each tr in table not the header
+                                  trIndex++; // tr index counter
+                                  // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                                  if (
+                                    trIndex > maxRows * pageNum ||
+                                    trIndex <= maxRows * pageNum - maxRows
+                                  ) {
+                                    $(this).hide();
+                                  } else {
+                                    $(this).show();
+                                  } //else fade in
+                                }); // end of for each tr in table
+                              }); // end of on click pagination list
+                        	  limitPagging();
+                            })
+                            .val(5000)
+                            .change();
+                        
+                          // end of on select change
+                        
+                          // END OF PAGINATION
+                        }
+
+                        function limitPagging(){
+                        	// alert($('.pagination li').length)
+                        
+                        	if($('.pagination li').length > 7 ){
+                        			if( $('.pagination li.active').attr('data-page') <= 3 ){
+                        			$('.pagination li:gt(5)').hide();
+                        			$('.pagination li:lt(5)').show();
+                        			$('.pagination [data-page="next"]').show();
+                        		}if ($('.pagination li.active').attr('data-page') > 3){
+                        			$('.pagination li:gt(0)').hide();
+                        			$('.pagination [data-page="next"]').show();
+                        			for( let i = ( parseInt($('.pagination li.active').attr('data-page'))  -2 )  ; i <= ( parseInt($('.pagination li.active').attr('data-page'))  + 2 ) ; i++ ){
+                        				$('.pagination [data-page="'+i+'"]').show();
+                                    
+                        			}
+                                
+                        		}
+                        	}
+                        }
+
+                        $(function() {
+                          // Just to append id number for each row
+                          //$('table tr:eq(0)').prepend('<th> ID </th>');
+                        
+                          var id = 0;
+                        
+                          $('table tr:gt(0)').each(function() {
+                            id++;
+                            //$(this).prepend('<td>' + id + '</td>');
+                          });
+                        });
+
+                    </script>
+
+                        <script>
+
+                            const url = "/client/getdata" ;
+                        
+                                fetch(url)
+                                    .then(function (response) {
+                                        return response.json();
+                                    })
+                                    .then(function (data) {
+                                        $("#table-id tbody tr").remove(); 
+                                        appendData(data);
+                                    })
+                                    .catch(function (err) {
+                                        console.log('error: ' + err);
+                                    });
+                                
+                                function appendData(data) {
+                                    var mainContainer = document.getElementById("tbody");
+                                    
+                                    for (var i = 0; i < data.length; i++) {
+                    
+                                      
+                    
+                                        var client_id = data[i].client_id;
+                    
+                                        var div = document.createElement("tr");
+                                        div.innerHTML = '<tr>' +
+                                                            
+                                                            '<td scope="col">' + client_id + '</td>' +
+                                                            '<td scope="col">' + data[i].client_name + '</td>' +
+                                                            '<td scope="col">' + data[i].client_phone + '</td>' +
+                                                            '<td scope="col">' + data[i].client_email + '</td>' +
+                                                            '<td scope="col">' + 
+                                                                '<button id="' + client_id + '" type="button" onclick="view_client(this.id)" class="btn btn-outline-info btn-sm waves-effect waves-light m-1 pull-right" data-toggle="modal" data-target="#view-note"><i class="fa fa-eye mr-1"></i> View Note</button>' +     
+                                                            '</td>' +
+                                                           
+                                                            '<td>' + 
+                                                                '<button id="' + client_id + '" type="button" onclick="edit_client_data(this.id)" class="btn btn-outline-success waves-effect waves-light btn-sm m-1" data-toggle="modal" data-target="#edit_client"> <i class="fa fa-edit"></i>&nbsp;<span>Edit</span> </button>' + 
+                                                            '</td>' +
+                                                            '<td scope="col">' + 
+                                                                '<button id="' + client_id + '" type="button" onclick="remove_client(this.id)" class="btn btn-outline-danger btn-sm waves-effect waves-light m-1 pull-right" data-toggle="modal" data-target="#removeStudentPassModal"><i class="fa fa-trash mr-1"></i> REMOVE</button>' + 
+                                                            '</td>'
+                                                        '</tr>' ;
+                                        mainContainer.appendChild(div);
+                    
+                                    }
+                                }
+                       
+
+                                function remove_client(clicked_id) {
+                                const url2 = "/client/remove?id=" + clicked_id;
+                    
+                                fetch(url2)
+                                    .then(function () {
+                                        //return response.json();
+                                    })
+                                    .then(function () {
+                                        $("#tbody tr").remove(); 
+                                        status_click();
+                                    })
+                                    .catch(function (err) {
+                                        console.log('error: ' + err);
+                                    });
+                                }
+
+                                function status_click() {
+                                    const url50 = "/client/getdata";
+
+                                    fetch(url50)
+                                        .then(function (response) {
+                                            return response.json();
+                                        })
+                                        .then(function (data) {
+                                            $("#table-id tbody tr").remove();
+                                            appendData50(data);
+                                        })
+                                        .catch(function (err) {
+                                            console.log('error: ' + err);
+                                        });
+                                    
+                                        function appendData50(data) {
+                                        var mainContainer = document.getElementById("tbody");
+                                        
+                                        for (var i = 0; i < data.length; i++) {
+                    
+                                            var client_id = data[i].client_id;
+
+                                            var div = document.createElement("tr");
+                                            div.innerHTML = '<tr>' +
+
+                                                                '<td scope="col">' + client_id + '</td>' +
+                                                                '<td scope="col">' + data[i].client_name + '</td>' +
+                                                                '<td scope="col">' + data[i].client_phone + '</td>' +
+                                                                '<td scope="col">' + data[i].client_email + '</td>' +
+                                                                '<td scope="col">' + 
+                                                                    '<button id="' + client_id + '" type="button" onclick="view_client(this.id)" class="btn btn-outline-info btn-sm waves-effect waves-light m-1 pull-right" data-toggle="modal" data-target="#view-note"><i class="fa fa-eye mr-1"></i> View Note</button>' +     
+                                                                '</td>' +
+
+                                                                '<td>' + 
+                                                                    '<button id="' + client_id + '" type="button" onclick="edit_client_data(this.id)" class="btn btn-outline-success waves-effect waves-light btn-sm m-1" data-toggle="modal" data-target="#edit_client"> <i class="fa fa-edit"></i>&nbsp;<span>Edit</span> </button>' + 
+                                                                '</td>' +
+                                                                '<td scope="col">' + 
+                                                                    '<button id="' + client_id + '" type="button" onclick="remove_client(this.id)" class="btn btn-outline-danger btn-sm waves-effect waves-light m-1 pull-right" data-toggle="modal" data-target="#removeStudentPassModal"><i class="fa fa-trash mr-1"></i> REMOVE</button>' + 
+                                                                '</td>'
+                                                            '</tr>' ;
+                                            mainContainer.appendChild(div);
+                                                                                        
+                                        }
+                                   }
+                                }
+                        </script>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <!-- End container-fluid-->
+            <div class="overlay">
+            </div>
+        </div>
+        <!--End content-wrapper-->
+                
+    
+
+
+    <!--End Back To Top Button-->
+            <!-- // END Header Layout Content -->
+
+            <!-- Footer -->
+
+            <div class="bg-white border-top-2 mt-auto">
+                <div class="container page__container page-section d-flex flex-column">
+                    <p class="text-70 brand mb-24pt">
+                        <a href="http://mazesoftsolutions.com/"><img class="brand-icon"
+                             src="maze.jpeg"
+                             width="150"
+                             alt="mazesoftsolution"></a>
+                    </p>
+                    <p class="measure-lead-max text-50 small mr-8pt">We have reached an age where the entire world is reduced to a global village. In this realm of connected living and sharing, we envision a future that will redefine the very purpose of our existence. Today, the solutions are more refined than the demand itself. What we get is better than what we asked for. Businesses, big or small, look for companies that will refine their business needs, more than offering a ready solution. They look for companies that offer competitive web and mobile apps development, e-commerce, and Open-source CMS development to propel their business expansion.</p>
+                    <p class="text-50 small mt-n1 mb-0">Developed by <a href="http://www.mazesoftsolutions.com/">Maze Soft Solution</a></p>
+                </div>
+            </div>
+
+            <!-- // END Footer -->
+
+        </div>
+        <!-- // END Header Layout -->
+
+        <!--Modal Data Start-->
+        <script>
+            var clicked_request_id;
+
+            function view_client(clicked_id){
+                    
+                clicked_request_id = clicked_id;
+
+                console.log(clicked_request_id);
+
+                const url421 = "/report_content/getdata?client_id=" + clicked_id;
+                
+                fetch(url421)
+                
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    $("#client-note tbody tr").remove(); 
+                    appendData105(data);
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });
+
+                function appendData105(data) {
+                    var mainContainer = document.getElementById("tbody105");
+                                    
+                        for(var i=0; i<data.length; i++){
+                            
+                            $('#tbody105').append(
+                                '<tr>' +
+                                    '<td scope="col">' + data[i].client_address +'</td>' +
+                                '</tr>'
+                            );
+                        }
+                    }           
+
+            }
+        </script>
+        <div class="modal fade" id="view-note" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Client's Note</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card table-responsive">
+                            <table class="table table-light table-striped shadow-light" id="client-note" style="text-align: center; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Client's Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody105">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="hidden" name="sid" value="370">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-inverse-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            var clicked_request_client_data;
+
+            function edit_client_data(clicked_id){
+
+                clicked_request_client_data = clicked_id;
+            
+                console.log(clicked_request_client_data);
+            
+                const url429 = "/edit_client_data/getdata?client_id=" + clicked_id;
+
+                fetch(url429)
+
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+
+                    var client_name = data[0].client_name;
+                    var client_phone = data[0].client_phone;
+                    var client_email = data[0].client_email;
+                    var client_address = data[0].client_address;
+
+                    $("#input1").empty();
+                    $("#input2").empty();
+                    $("#input3").empty();
+                    $("#input4").empty();
+                    $("#input5").empty();
+
+                    $('#edit_client_form').attr('action', '/client_data/edit?client_id=' + clicked_id);
+
+                    $('#input1').append('<div class="input-group-prepend">' +
+                                            '<span class="input-group-text"><i class="fa fa-id-card"></i></span>' +
+                                        '</div>' +
+                                        '<input type="text" name="client_id" class="form-control" required="" readonly value="'+ clicked_request_client_data +'">');
+
+                    $('#input2').append('<div class="input-group-prepend">' +
+                                            '<span class="input-group-text"><i class="fa fa-user"></i></span>' +
+                                        '</div>' +
+                                        '<input id="input_2" type="text" name="name" class="form-control" placeholder="Please type your client name" maxlength="200" required="">');
+                    document.getElementById('input_2').setAttribute('value', client_name);
+
+                    $('#input3').append('<div class="input-group-prepend">' +
+                                            '<span class="input-group-text"><i class="fa fa-phone"></i></span>' +
+                                        '</div>' +
+                                        '<input id="input_3" type="text" name="phone" class="form-control" placeholder="Client Phone" maxlength="10">');
+                    document.getElementById('input_3').setAttribute('value', client_phone);
+
+                    $('#input4').append('<div class="input-group-prepend">' +
+                                            '<span class="input-group-text"><i class="fa fa-envelope"></i></span>' +
+                                        '</div>' +
+                                        '<input id="input_4" type="email" name="email" class="form-control" placeholder="E-mail" maxlength="200">');
+                    document.getElementById('input_4').setAttribute('value', client_email);
+
+                    $('#input5').append('<textarea rows="6" name="address" class="form-control" placeholder="Add Note(Optional)" maxlength="1500">' + client_address + '</textarea>');
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });           
+            }
+        </script>
+        <div class="modal fade" id="edit_client" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit My Client's Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="" method="post" id="edit_client_form">
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">Client ID <b style="color: red;">*</b></label>
+                                <div class="col-sm-10">
+                                    <div class="input-group" id="input1">
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                            <div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">Name <b style="color: red;">*</b></label>
+                                <div class="col-sm-10">
+                                    <div class="input-group" id="input2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">Phone </label>
+                                <div class="col-sm-10">
+                                    <div class="input-group" id="input3">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">E-mail</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group" id="input4">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">Aadhaar No</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-id-card"></i></span>
+                                        </div>
+                                        <input type="text" name="aadhaar" class="form-control" placeholder="Aadhaar Number" maxlength="12">
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="form-group row">
+                                <label for="input-21" class="col-sm-2 col-form-label">Add Note(Optional)</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group" id="input5">
+                                        
+                                    </div>
+                                </div>
+                            </div>                                  
+                        </div>
+                        <input type="hidden" name="sid" value="370">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-inverse-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="submit" name="add_client" class="btn btn-dark shadow-dark px-5"><i class="fa fa-plus"></i> &nbsp;&nbsp; Update My Client Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Data End -->
+
+        <!-- Drawer -->
+        <div class="mdk-drawer js-mdk-drawer"
+        id="default-drawer">
+       <div class="mdk-drawer__content">
+           <div class="sidebar bg-warning sidebar-left"
+                data-perfect-scrollbar>
+
+               <!-- Sidebar Content -->
+
+               <a href="/home"
+                  class="sidebar-brand ">
+                   <!-- <img class="sidebar-brand-icon" src="./public/images/illustration/student/128/white.svg" alt="Luma"> -->
+
+                   <span class="avatar avatar-xl sidebar-brand-icon h-auto">
+
+                       <span class="avatar-title rounded"><img src="logo.jpg"
+                           alt="logo"
+                           class="img-fluid" /></span>
+
+                   </span>
+
+                   <div id="side_panel"></div>
+               </a>
+
+               
+                   
+               <ul class="sidebar-menu">
+
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          href="/home">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">dashboard</span>
+                           <span class="sidebar-menu-text">Dashboard</span>
+                       </a>
+                   </li>
+                   <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button"
+                           href="/add_elements">
+                            <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">playlist_add</span>
+                            <span class="sidebar-menu-text">Add Elements</span>
+                        </a>
+                   </li>
+                   <ul class="sidebar-menu">
+
+                       <li class="sidebar-menu-item">
+                           <a class="sidebar-menu-button js-sidebar-collapse"
+                              data-toggle="collapse"
+                              href="#enterprise_menu">
+                               <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">people_outline</span>
+                               Clients
+                               <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                           </a>
+                           <ul class="sidebar-submenu collapse sm-indent"
+                               id="enterprise_menu">
+                               <li class="sidebar-menu-item">
+                                   <a class="sidebar-menu-button"
+                                      href="/client">
+                                       <span class="sidebar-menu-text">Client</span>
+                                   </a>
+                               </li>
+                               <li class="sidebar-menu-item">
+                                   <a class="sidebar-menu-button"
+                                      href="/add_client">
+                                       <span class="sidebar-menu-text">Add Client</span>
+                                   </a>
+                               </li>
+                           </ul>
+                       </li>
+                       <li class="sidebar-menu-item">
+                           <a class="sidebar-menu-button"
+                              data-toggle="collapse"
+                              href="#account_menu">
+                               <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">loyalty</span>
+                               Quotation
+                               <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                           </a>
+                           <ul class="sidebar-submenu collapse sm-indent"
+                               id="account_menu">
+                               <li class="sidebar-menu-item">
+                                   <a class="sidebar-menu-button"
+                                      href="/quatation">
+                                       <span class="sidebar-menu-text">Quotation</span>
+                                   </a>
+                               </li>
+                               <li class="sidebar-menu-item">
+                                   <a class="sidebar-menu-button"
+                                      href="/add_quatation">
+                                       <span class="sidebar-menu-text">Create Quotation</span>
+                                   </a>
+                               </li>
+                           </ul>
+                       </li>
+                       <li class="sidebar-menu-item">
+                           <a class="sidebar-menu-button"
+                              href="/project">
+                               <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">assignment_returned</span>
+                               <span class="sidebar-menu-text">Projects</span>
+                           </a>
+                       </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          data-toggle="collapse"
+                          href="#ecommerce_menu">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_balance</span>
+                           Finance
+                           <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                       </a>
+                       <ul class="sidebar-submenu collapse sm-indent"
+                           id="ecommerce_menu">
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button"
+                                  href="/finance">
+                                   <span class="sidebar-menu-text">Finance</span>
+                               </a>
+                           </li>
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button disabled"
+                                  href="/add_finance">
+                                   <span class="sidebar-menu-text">Add Expenses</span>
+                               </a>
+                           </li>
+                       </ul>
+                   </li>
+
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          href="/acc_sum">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">pie_chart</span>
+                           <span class="sidebar-menu-text">Total Account Summary</span>
+                       </a>
+                   </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          href="/profit_loss">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">bar_chart</span>
+                           <span class="sidebar-menu-text">Profit/Loss</span>
+                       </a>
+                   </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          data-toggle="collapse"
+                          href="#messaging_menu">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_tree</span>
+                           Employee
+                           <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                       </a>
+                       <ul class="sidebar-submenu collapse sm-indent"
+                           id="messaging_menu">
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button"
+                                  href="/employee">
+                                   <span class="sidebar-menu-text">Employee</span>
+                               </a>
+                           </li>
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button"
+                                  href="/add_employee">
+                                   <span class="sidebar-menu-text">Add Employee</span>
+                               </a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          data-toggle="collapse"
+                          href="#components_menu">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_box</span>
+                           Users
+                           <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                       </a>
+                       <ul class="sidebar-submenu collapse sm-indent"
+                           id="components_menu">
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button"
+                                  href="/user">
+                                   <span class="sidebar-menu-text">Users</span>
+                               </a>
+                           </li>
+                           <li class="sidebar-menu-item">
+                               <a class="sidebar-menu-button"
+                                  href="/add_user">
+                                   <span class="sidebar-menu-text">Add Users</span>
+                               </a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          href="/system_history">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">access_time</span>
+                           <span class="sidebar-menu-text">System History</span>
+                       </a>
+                   </li>
+                   <li class="sidebar-menu-item">
+                       <a class="sidebar-menu-button"
+                          href="/bin">
+                           <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">restore_from_trash</span>
+                           <span class="sidebar-menu-text">Recyle Bin</span>
+                       </a>
+                   </li>
+               </ul>
+               
+
+               <!-- // END Sidebar Content -->
+
+           </div>
+       </div>
+   </div>
+        <!-- // END Drawer -->
+        
+        <!-- jQuery -->
+        <script src="./public/vendor/jquery.min.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="./public/vendor/popper.min.js"></script>
+        <script src="./public/vendor/bootstrap.min.js"></script>
+
+        <!-- Perfect Scrollbar -->
+        <script src="./public/vendor/perfect-scrollbar.min.js"></script>
+
+        <!-- DOM Factory -->
+        <script src="./public/vendor/dom-factory.js"></script>
+
+        <!-- MDK -->
+        <script src="./public/vendor/material-design-kit.js"></script>
+
+        <!-- App JS -->
+        <script src="./public/js/app.js"></script>
+
+        <!-- Preloader -->
+        <script src="./public/js/preloader.js"></script>
+
+    </body>
+
+</html>

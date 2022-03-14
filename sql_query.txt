@@ -1,0 +1,270 @@
+create table client (
+client_id bigserial primary key,
+
+
+client_name varchar(200),
+client_phone varchar(20),
+client_email varchar(200),
+client_aadhaar varchar(20),
+client_address varchar(1500)
+);
+
+
+create table staff (
+    staff_id varchar(300) primary key,
+    staff_fname varchar(300),
+    staff_lname varchar(300),
+	staff_fathername varchar(300),
+    staff_phone varchar(20),
+    staff_email varchar(300),
+	staff_aadhaar varchar(20),
+	staff_designation varchar(300),
+	staff_joindate varchar(20),
+	staff_address varchar(500),
+	staff_totalsalary numeric(7,0)
+);
+
+create table final_report (
+sl_no bigserial primary key,
+description varchar(1500),
+hsn_sac varchar(200),
+gst varchar(50),
+quantity varchar(50),
+rate  varchar(50),
+measurement varchar(50),
+disc varchar(50),
+amount numeric,
+project_id varchar(200),
+client_details varchar(1500),
+ship_details varchar(1500),
+invoice_number varchar(200),
+invoice_date varchar(20),
+delivery_note varchar(1500),
+mode_of_payment varchar(200),
+ref_no_date varchar(250),
+other_reference varchar(1500),
+buyers_order_no varchar(200),
+order_date varchar(20),
+dispatch_doc_no varchar(200),
+delivery_note_date varchar(20),
+dispatched_through varchar(200),
+destination varchar(1500),
+terms_of_delivery varchar(1500),
+row_type varchar(50)
+);
+
+
+create table project (
+project_id bigserial primary key,
+client_id varchar(200),
+project_name varchar(200),
+project_Details varchar(1500)
+);
+
+create table specification_metarials (
+id bigserial primary key,
+client_id varchar(200),
+specification_metarials varchar(10000));
+
+create table terms (
+id bigserial primary key,
+client_id varchar(200),
+terms varchar(10000));
+
+
+
+create table housing_quatation (
+id bigserial primary key,
+client_id varchar(200),
+heading varchar(1500),
+sl_no numeric,
+perticulars varchar(1500),
+measurement varchar(50),
+sq_ft varchar(50),
+amount numeric,
+quatation_id bigserial,
+quatation_heading varchar(200),
+specification_metarials varchar(10000),
+terms varchar(10000)
+);
+
+create table corporate_quatation (
+id bigserial primary key,
+client_id varchar(200),
+heading varchar(1500),
+sl_no numeric,
+description varchar(1500),
+unit varchar(50),
+quantity varchar(50),
+rate varchar(50),
+amount numeric,
+quatation_id bigserial,
+quatation_heading varchar(200),
+specification_metarials varchar(10000),
+terms varchar(10000)
+);
+
+
+create table pay_by_client(
+id bigserial primary key,
+project_id varchar(200),
+client_id varchar(200),
+amount numeric,
+transaction_mode varchar(50),
+checque_no varchar(200),
+transaction_id varchar(200),
+Purpose varchar(1500),
+transaction_date varchar(20)
+);
+
+create table bill_no(
+id bigserial primary key,
+client_id varchar(200)
+);
+
+
+create table daily_expenses (
+id bigserial primary key,
+project_id varchar(200),
+client_id varchar(200),
+benificiary_name varchar(200),	
+amount numeric,
+transaction_mode varchar(50),
+checque_no varchar(200),
+transaction_id varchar(200),
+Purpose varchar(1500),
+transaction_date varchar(20)
+)
+
+
+create table work_report(
+id bigserial primary key,
+project_id varchar(200),
+client_id varchar(200),
+date varchar(20),
+work_done varchar(15000),
+pending_work varchar(15000),
+next_day_plan varchar(15000),
+days_required numeric,
+days_left numeric
+)
+
+alter table housing_quatation
+add rate_per_sq_ft varchar(50)
+
+alter table housing_quatation
+add gst varchar(50);
+
+
+CREATE TABLE finance (
+id bigserial primary key,
+name varchar(255), 
+purpose varchar(1000), 
+amount varchar(50), 
+mobile varchar(50),
+payee varchar(250),
+transaction_date varchar(20));
+
+CREATE TABLE cashbook
+(
+    id bigserial primary key,
+    purpose varchar(500),
+    benificiary_name varchar(300),
+    credit numeric,
+    debit numeric,
+    transaction_id varchar(100),
+    transaction_method varchar(100),
+    cheque_number varchar(100),
+    transaction_date varchar(20),
+    transaction_time varchar(20),
+    project_id varchar(100),
+    transaction_type varchar(100)
+);
+
+
+alter table project
+add column status varchar(50);
+
+alter table project
+add column status_2 varchar(50);
+
+alter table housing_quatation
+add column status varchar(50);
+
+alter table corporate_quatation
+add column status varchar(50);
+
+CREATE TABLE users (  
+	id UUID NOT NULL,  
+	username TEXT NOT NULL UNIQUE,  
+	password TEXT NOT NULL,  
+	name varchar(500),
+	phone varchar(20),
+	email varchar(500),
+	access1 varchar(50),
+	access2 varchar(50),
+	access3 varchar(50),
+	access4 varchar(50),
+	access5 varchar(50),
+	CONSTRAINT users_pkey PRIMARY KEY(id)  
+);
+
+create table system_history (
+	id bigserial primary key,
+	details varchar(500),
+	username varchar(200),
+	action_date varchar (20),
+	action_time varchar (20)
+);
+
+alter table final_report
+add gst_status varchar(50);
+
+
+
+
+alter table pay_by_client
+add column gst_rate varchar(20);
+
+alter table pay_by_client
+add column cgst numeric;
+
+alter table pay_by_client
+add column sgst numeric;
+
+alter table pay_by_client
+add column taxable_value numeric;
+
+alter table pay_by_client
+add column total_gst numeric;
+
+alter table cashbook
+add column total_gst numeric;
+
+create table corporate_quotation_heading(
+id bigserial primary key,
+heading varchar(1000)
+);
+
+create table corporate_quotation_element(
+id bigserial primary key,
+type varchar(200),
+element varchar(5000)
+);
+
+create table final_bill_data_element(
+id bigserial primary key,
+type varchar(200),
+element varchar(10000)
+);
+
+create table housing_quotation_heading(
+id bigserial primary key,
+heading varchar(1000)
+);
+
+create table housing_quotation_element(
+id bigserial primary key,
+type varchar(200),
+element varchar(5000)
+);
